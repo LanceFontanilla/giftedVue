@@ -1,5 +1,5 @@
 <template>
-    <div class="col-12">
+    <div class="col-12" @click="openGift(`${gift.id}`)">
      <section class="row g-1">
         <div  class="col-md-4">
           <div class="card elevation-1">
@@ -20,15 +20,27 @@
 <script>
 
 import { Gift } from '../models/Gift.js';
+import { giftsService } from '../services/GiftsService.js';
+import Pop from '../utils/Pop.js';
+import { logger } from '../utils/Logger.js';
 
 export default {
   props: {gift: {type: Gift, required: true}},
 
 
 
-  setup(props) {
-  return {};
+  setup() {
+  return {
+    async openGift(giftId){
+      try {
+        logger.log(giftId)
+        await giftsService.openGift(giftId)
+      } catch (error) {
+        Pop.error(error)
+      }
+    }
 
+  };
 },
 };
 </script>

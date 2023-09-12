@@ -39,10 +39,10 @@ export default {
     }
     return {
       getGifts,
+      gifts : computed(()=> AppState.gifts)
     }
   },
   
-  gifts : computed(()=> AppState.gifts)
 
 
 }
